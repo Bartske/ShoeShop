@@ -10,11 +10,15 @@ namespace Logic
     {
         BagItemContext bagItemContext;
         AccountContext accountContext;
+        OrderContext orderContext;
+        OrderItemContext orderItemContext;
 
         public ShopLogic()
         {
             bagItemContext = new BagItemContext();
             accountContext = new AccountContext();
+            orderContext = new OrderContext();
+            orderItemContext = new OrderItemContext();
         }
 
         public void AddToBag(int ProductID, int AccountID)
@@ -35,7 +39,30 @@ namespace Logic
 
         public void CreateOrder(int accountID)
         {
+            int orderID = orderContext.CreateOrder(new Order()
+            {
+                AccountID = accountID
+            }).ID;
 
+            List<OrderItem> items = new List<OrderItem>();
+
+            foreach (BagItem Bagitem in GetBagItems(accountID))
+            {
+                items.Add(
+                    new OrderItem()
+                    {
+                        OrderID = orderID,
+                        ProductID = Bagitem.ProductID
+                    }
+                 );
+            }
+            orderItemContext.CreateOrderItems(items);
+
+        }
+
+        public void DeleteBag(int accountID)
+        {
+            bagItemContext.DeleteBagItems(bagItemContext.GetItemsFromUser(accountID));
         }
     }
 }

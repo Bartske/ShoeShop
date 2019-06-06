@@ -56,6 +56,8 @@ namespace Models
         
         public Login Login { get; set; }
 
+        public bool Admin { get; set; }
+
         public List<BagItem> Bag { get; set; }
     }
 }

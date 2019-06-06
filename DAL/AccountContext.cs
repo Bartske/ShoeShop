@@ -30,7 +30,7 @@ namespace DAL
         public Account CreateAccount(Account Account)
         {
             Account.PhoneNumber = Convert.ToInt32(Account.PhoneNumber.ToString().Replace(" ", string.Empty));
-            dataConnector.Insert("INSERT INTO `account` (`ID`, `FirstName`, `MiddleName`, `LastName`, `PhoneNumber`, `Email`, `Country`, `Address`, `City`, `ZIPcode`, `LoginID`) VALUES (NULL, '"+Account.FirstName+ "', '" + Account.MiddleName + "', '" + Account.LastName + "', '" + Account.PhoneNumber + "', '" + Account.Email + "', '" + Account.Country + "', '" + Account.Address + "', '" + Account.City + "', '" + Account.ZIPcode + "', '" + Account.Login.ID + "');");
+            dataConnector.Insert("INSERT INTO `account` (`ID`, `FirstName`, `MiddleName`, `LastName`, `PhoneNumber`, `Email`, `Country`, `Address`, `City`, `ZIPcode`, `LoginID`, `Admin`) VALUES (NULL, '"+Account.FirstName+ "', '" + Account.MiddleName + "', '" + Account.LastName + "', '" + Account.PhoneNumber + "', '" + Account.Email + "', '" + Account.Country + "', '" + Account.Address + "', '" + Account.City + "', '" + Account.ZIPcode + "', '" + Account.Login.ID + "', '0');");
             return GetAccount(Account);
         }
 
@@ -58,6 +58,7 @@ namespace DAL
                 Country = dataConnector.Select("SELECT `Country` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0],
                 ZIPcode = dataConnector.Select("SELECT `ZIPcode` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0],
                 Login = loginContext.GetLogin(Convert.ToInt32(dataConnector.Select("SELECT `LoginID` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0])),
+                Admin = dataConnector.Select("SELECT `Country` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0] == "1" ? true : false,
                 Bag = bagItemContext.GetItemsFromUser(ID)
             };
         }
@@ -89,7 +90,9 @@ namespace DAL
 
         public void UpdateAccount(Account Account)
         {
-            dataConnector.Update("UPDATE `account` SET `FirstName` = '"+Account.FirstName+ "', `MiddleName` = '" + Account.MiddleName + "', `LastName` = '" + Account.LastName + "', `PhoneNumber` = '" + Account.PhoneNumber + "', `Email` = '" + Account.Email + "', `Country` = '" + Account.Country + "', `Address` = '" + Account.Address + "', `City` = '" + Account.City + "', `ZIPcode` = '" + Account.ZIPcode + "' WHERE `account`.`ID` = " + Account.ID + ";");
+            string admin;
+            if (Account.Admin) { admin = "1"; } else { admin = "0"; }
+            dataConnector.Update("UPDATE `account` SET `FirstName` = '"+Account.FirstName+ "', `MiddleName` = '" + Account.MiddleName + "', `LastName` = '" + Account.LastName + "', `PhoneNumber` = '" + Account.PhoneNumber + "', `Email` = '" + Account.Email + "', `Country` = '" + Account.Country + "', `Address` = '" + Account.Address + "', `City` = '" + Account.City + "', `ZIPcode` = '" + Account.ZIPcode + "', `Admin` = '"+admin+"' WHERE `account`.`ID` = " + Account.ID + ";");
         }
 
         public void UpdateAccounts(List<Account> Accounts)
