@@ -9,5 +9,6 @@ namespace Models
         public int ID { get; set; }
         public int AccountID { get; set; }
         public int ProductID { get; set; }
+        public Shoe shoe { get; set; }
     }
 }

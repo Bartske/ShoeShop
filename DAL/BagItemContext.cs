@@ -9,15 +9,19 @@ namespace DAL
     public class BagItemContext
     {
         private IDataConnector dataConnector;
+        ShoeContext shoeContext;
 
         public BagItemContext()
         {
             dataConnector = new SQLConnector();
+            shoeContext = new ShoeContext();
         }
 
         public BagItemContext(IDataConnector dataConnector)
         {
             dataConnector = this.dataConnector;
+            shoeContext = new ShoeContext(dataConnector);
+
         }
 
 
@@ -43,7 +47,8 @@ namespace DAL
             {
                 ID = ID,
                 AccountID = Convert.ToInt32(dataConnector.Select("SELECT `AccountID` FROM `bagitem` WHERE `ID` = '" + ID + "'")[0]),
-                ProductID = Convert.ToInt32(dataConnector.Select("SELECT `ProductID` FROM `bagitem` WHERE `ID` = '" + ID + "'")[0])
+                ProductID = Convert.ToInt32(dataConnector.Select("SELECT `ProductID` FROM `bagitem` WHERE `ID` = '" + ID + "'")[0]),
+                shoe = shoeContext.GetShoe(Convert.ToInt32(dataConnector.Select("SELECT `ProductID` FROM `bagitem` WHERE `ID` = '" + ID + "'")[0]))
             };
         }
 
