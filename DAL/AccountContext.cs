@@ -58,7 +58,7 @@ namespace DAL
                 Country = dataConnector.Select("SELECT `Country` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0],
                 ZIPcode = dataConnector.Select("SELECT `ZIPcode` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0],
                 Login = loginContext.GetLogin(Convert.ToInt32(dataConnector.Select("SELECT `LoginID` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0])),
-                Admin = dataConnector.Select("SELECT `Country` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0] == "1" ? true : false,
+                Admin = dataConnector.Select("SELECT `Admin` FROM `account` WHERE `ID` = '" + ID.ToString() + "'")[0] == "1" ? true : false,
                 Bag = bagItemContext.GetItemsFromUser(ID)
             };
         }

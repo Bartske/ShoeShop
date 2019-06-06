@@ -35,8 +35,16 @@ namespace ShoeShop.Controllers
                 HttpContext.Session.SetString("FullName", account.FirstName + " " + account.MiddleName + " " + account.LastName);
             
             HttpContext.Session.SetString("AccountID", account.ID.ToString());
-            
-            return View();
+
+            if (account.Admin)
+            {
+                return RedirectToAction("Index", "Manage");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         public IActionResult Register()
