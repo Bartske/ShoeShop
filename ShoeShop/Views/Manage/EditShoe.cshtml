@@ -1,0 +1,102 @@
+﻿@model ShoeShop.ViewModels.EditShoeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Manage</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="@Url.Action("Index", "Home")">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Manage</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container" style="background-color: white">
+        <div style="background-color: white;">
+            <br />
+            <br />
+
+            @using (Html.BeginForm("EditShoe", "Manage", FormMethod.Post, new { @class = "row contact_form", id = "AddShoeForm", enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(model => model.shoe.ID)
+
+                <h2 style="margin-bottom: 15px; text-align: center">Edit Shoe</h2>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Name</p>
+                    @Html.EditorFor(model => model.shoe.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Name" } })
+                    @Html.ValidationMessageFor(model => model.shoe.Name)
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Price</p>
+                    @Html.EditorFor(model => model.shoe.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Price" } })
+                    @Html.ValidationMessageFor(model => model.shoe.Price)
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Old price</p>
+                    @Html.EditorFor(model => model.shoe.OldPrice, new { htmlAttributes = new { @class = "form-control", placeholder = "OldPrice" } })
+                    @Html.ValidationMessageFor(model => model.shoe.OldPrice)
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Description</p>
+                    @Html.EditorFor(model => model.shoe.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+                    @Html.ValidationMessageFor(model => model.shoe.Description)
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Color</p>
+                    @Html.EditorFor(model => model.shoe.Color, new { htmlAttributes = new { @class = "form-control", placeholder = "Color" } })
+                    @Html.ValidationMessageFor(model => model.shoe.Color)
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Sale</p>
+                    @Html.EditorFor(model => model.shoe.Sale, new { htmlAttributes = new { @class = "form-control", placeholder = "Sale" } })
+                    @Html.ValidationMessageFor(model => model.shoe.Sale)
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Image</p>
+                    <input type="file" name="file" id="file">
+                    @Html.ValidationMessageFor(model => model.shoe.img)
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Catogory</p>
+                    <select class="form-control" id="GroupID" name="GroupID">
+                        @for (int i = 0; i < Model.Groups.Count; i++)
+                        {
+                            <option value="@Model.Groups[i].ID">@Model.Groups[i].Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                    <p>Brand</p>
+                    <select class="form-control" id="BrandID" name="BrandID">
+                        @for (int i = 0; i < Model.Brands.Count; i++)
+                        {
+                            <option value="@Model.Brands[i].ID">@Model.Brands[i].Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <input type="submit" value="Create" class="primary-btn" style="width:100%" />
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

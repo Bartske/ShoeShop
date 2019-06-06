@@ -1,0 +1,27 @@
+﻿@model ShoeShop.ViewModels.ProductOverViewViewModel
+
+@for (int i = 0; i < Model.shoes.Count; i++)
+{
+    <!-- single product -->
+    <div class="col-lg-4 col-md-6">
+        <div class="single-product">
+            <a href="Product/Product/@Model.shoes[i].ID"><img class="img-fluid" src="~/img/product/@Model.shoes[i].img" alt=""></a>
+            <div class="product-details">
+                <h6>
+                    @Model.shoes[i].Name
+                </h6>
+                <div class="price">
+                    <h6>€@Model.shoes[i].Price</h6>
+                    <h6 class="l-through">€@Model.shoes[i].OldPrice</h6>
+                </div>
+                <div class="prd-bottom">
+
+                    <a href="" class="social-info">
+                        <span class="ti-bag"></span>
+                        <p class="hover-text">add to bag</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

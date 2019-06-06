@@ -1,0 +1,90 @@
+﻿@model ShoeShop.ViewModels.EditAccountViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Edit Account</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="@Url.Action("Index","Home")">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Edit</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+    <div class="container">
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Account information</h3>
+                    @using (Html.BeginForm("EditAccount", "Manage", FormMethod.Post, new { @class = "row contact_form", id = "RegisterForm" }))
+                    {
+                        @Html.HiddenFor(Model => Model.account.ID)
+                        @Html.HiddenFor(Model => Model.account.Login.ID)
+
+                        <div class="col-md-6 form-group p_star">
+                            @Html.EditorFor(model => model.account.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                            @Html.ValidationMessageFor(model => model.account.FirstName)
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            @Html.EditorFor(model => model.account.MiddleName, new { htmlAttributes = new { @class = "form-control", placeholder = "Middel Name" } })
+                            @Html.ValidationMessageFor(model => model.account.MiddleName)
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            @Html.EditorFor(model => model.account.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                            @Html.ValidationMessageFor(model => model.account.LastName)
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            @Html.EditorFor(model => model.account.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Phonenumber" } })
+                            @Html.ValidationMessageFor(model => model.account.PhoneNumber)
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            @Html.EditorFor(model => model.account.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                            @Html.ValidationMessageFor(model => model.account.Email)
+                        </div>
+
+
+                        <div class="col-md-12 form-group p_star">
+                            @Html.EditorFor(model => model.account.Country, new { htmlAttributes = new { @class = "form-control", placeholder = "Country" } })
+                            @Html.ValidationMessageFor(model => model.account.Country)
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            @Html.EditorFor(model => model.account.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
+                            @Html.ValidationMessageFor(model => model.account.Address)
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            @Html.EditorFor(model => model.account.City, new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+                            @Html.ValidationMessageFor(model => model.account.City)
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            @Html.EditorFor(model => model.account.ZIPcode, new { htmlAttributes = new { @class = "form-control", placeholder = "ZIP code" } })
+                            @Html.ValidationMessageFor(model => model.account.ZIPcode)
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            @Html.EditorFor(model => model.login.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
+                            @Html.ValidationMessageFor(model => model.login.UserName)
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="button" value="Update" onclick="SubmitForm()" class="primary-btn" style="width:100%" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Checkout Area =================-->
+
+<script>
+    function SubmitForm() {
+            $('#RegisterForm').submit();
+    }
+</script>

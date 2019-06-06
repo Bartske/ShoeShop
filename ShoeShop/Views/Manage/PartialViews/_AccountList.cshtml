@@ -1,0 +1,65 @@
+﻿@model ShoeShop.ViewModels.AccountListViewModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Middle Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Accounts.Count; i++)
+        {
+            <tr data-toggle="collapse" data-target="#demo-@Model.Accounts[i].ID" class="accordion-toggle">
+                <td>@Model.Accounts[i].FirstName</td>
+                <td>@Model.Accounts[i].MiddleName</td>
+                <td>@Model.Accounts[i].LastName</td>
+                <td>@Model.Accounts[i].Email</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="hiddenRow">
+                    <div id="demo-@Model.Accounts[i].ID" class="accordian-body collapse">
+                        <div class="row">
+                            <div class="col-10">
+                                <b>PhoneNumber : </b> @Model.Accounts[i].PhoneNumber <br />
+                                <b>Country : </b> @Model.Accounts[i].Country <br />
+                                <b>Address : </b> @Model.Accounts[i].Address <br />
+                                <b>City : </b> @Model.Accounts[i].City <br />
+                                <b>Zip Code : </b> @Model.Accounts[i].ZIPcode <br />
+                                <b>Login Name : </b> @Model.Accounts[i].Login.UserName<br />
+                            </div>
+                            <div class="col-2">
+                                <input type="button" class="btn btn-primary" value="Edit" onclick="EditAccount(@Model.Accounts[i].ID)"/> <br />
+                                <input type="button" class="btn btn-primary" value="Reset Password" onclick="ResetPassword(@Model.Accounts[i].ID)"/> <br />
+                                <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteAccount(@Model.Accounts[i].ID)"/>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<script>
+    function EditAccount(id) {
+        window.location.href = '/Manage/EditAccount/' + id;
+    }
+    function DeleteAccount(id) {
+        var r = confirm("Are you sure you want to delete this Account?");
+        if (r == true) {
+            window.open('/Manage/DeleteAccount/' + id, '_blank');
+        } else {
+        }
+    }
+    function ResetPassword(id) {
+        var r = confirm("Are you sure you want to reset the password of this Account?");
+        if (r == true) {
+            window.open('/Account/ResetPassword/' + id, '_blank');
+        } else {
+        }
+    }
+</script>

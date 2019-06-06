@@ -1,0 +1,77 @@
+﻿@model ShoeShop.ViewModels.RegisterViewModel
+<div style="background-color: white;">
+    <br />
+    <br />
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "row contact_form", id = "RegisterForm" }))
+    {
+        <div class="col-md-6 form-group p_star">
+            @Html.EditorFor(model => model.account.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+            @Html.ValidationMessageFor(model => model.account.FirstName)
+        </div>
+        <div class="col-md-6 form-group p_star">
+            @Html.EditorFor(model => model.account.MiddleName, new { htmlAttributes = new { @class = "form-control", placeholder = "Middel Name" } })
+            @Html.ValidationMessageFor(model => model.account.MiddleName)
+        </div>
+        <div class="col-md-6 form-group p_star">
+            @Html.EditorFor(model => model.account.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+            @Html.ValidationMessageFor(model => model.account.LastName)
+        </div>
+        <div class="col-md-6 form-group p_star">
+            @Html.EditorFor(model => model.account.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Phonenumber" } })
+            @Html.ValidationMessageFor(model => model.account.PhoneNumber)
+        </div>
+        <div class="col-md-6 form-group p_star">
+            @Html.EditorFor(model => model.account.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+            @Html.ValidationMessageFor(model => model.account.Email)
+        </div>
+
+
+        <div class="col-md-12 form-group p_star">
+            @Html.EditorFor(model => model.account.Country, new { htmlAttributes = new { @class = "form-control", placeholder = "Country" } })
+            @Html.ValidationMessageFor(model => model.account.Country)
+        </div>
+        <div class="col-md-12 form-group p_star">
+            @Html.EditorFor(model => model.account.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
+            @Html.ValidationMessageFor(model => model.account.Address)
+        </div>
+        <div class="col-md-12 form-group p_star">
+            @Html.EditorFor(model => model.account.City, new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+            @Html.ValidationMessageFor(model => model.account.City)
+        </div>
+        <div class="col-md-12 form-group p_star">
+            @Html.EditorFor(model => model.account.ZIPcode, new { htmlAttributes = new { @class = "form-control", placeholder = "ZIP code" } })
+            @Html.ValidationMessageFor(model => model.account.ZIPcode)
+        </div>
+        <div class="col-md-12 form-group p_star">
+            @Html.EditorFor(model => model.login.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
+            @Html.ValidationMessageFor(model => model.login.UserName)
+        </div>
+        <div class="col-md-12 form-group p_star">
+            @Html.EditorFor(model => model.login.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+            @Html.ValidationMessageFor(model => model.login.Password)
+        </div>
+        <div class="col-md-12 form-group p_star">
+            @Html.EditorFor(model => model.login.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Repeat Password", id = "RepeatPassword" } })
+            @Html.ValidationMessageFor(model => model.login.Password, "", new { id = "RepeatPasswordMessage" })
+        </div>
+        <div class="col-md-12 form-group">
+            <input type="button" value="Register" onclick="SubmitForm()" class="primary-btn" style="width:100%" />
+        </div>
+    }
+
+</div>
+
+<script>
+    function SubmitForm() {
+        console.log($('#login_Password').val());
+        console.log($('#RepeatPassword').val());
+        if ($('#login_Password').val() == $('#RepeatPassword').val()) {
+            $('#RegisterForm').submit();
+
+        }
+        else {
+            alert("The passwords are not the same!");
+        }
+    }
+</script>

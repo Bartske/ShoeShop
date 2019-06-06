@@ -1,0 +1,77 @@
+﻿@model ShoeShop.ViewModels.NewShoeViewModel
+<div style="background-color: white;">
+    <br />
+    <br />
+
+    @using (Html.BeginForm("CreateShoe", "Manage", FormMethod.Post, new { @class = "row contact_form", id = "AddShoeForm", enctype = "multipart/form-data" }))
+    {
+        <h2 style="margin-bottom: 15px; text-align: center">Add new Shoe</h2>
+
+        <div class="col-md-12 form-group p_star">
+            <p>Name</p>
+            @Html.EditorFor(model => model.newShoe.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Name" } })
+            @Html.ValidationMessageFor(model => model.newShoe.Name)
+        </div>
+
+        <div class="col-md-12 form-group p_star">
+            <p>Price</p>
+            @Html.EditorFor(model => model.newShoe.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Price" } })
+            @Html.ValidationMessageFor(model => model.newShoe.Price)
+        </div>
+
+        <div class="col-md-12 form-group p_star">
+            <p>Old price</p>
+            @Html.EditorFor(model => model.newShoe.OldPrice, new { htmlAttributes = new { @class = "form-control", placeholder = "OldPrice" } })
+            @Html.ValidationMessageFor(model => model.newShoe.OldPrice)
+        </div>
+
+        <div class="col-md-12 form-group p_star">
+            <p>Description</p>
+            @Html.EditorFor(model => model.newShoe.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Description" } })
+            @Html.ValidationMessageFor(model => model.newShoe.Description)
+        </div>
+
+        <div class="col-md-12 form-group p_star">
+            <p>Color</p>
+            @Html.EditorFor(model => model.newShoe.Color, new { htmlAttributes = new { @class = "form-control", placeholder = "Color" } })
+            @Html.ValidationMessageFor(model => model.newShoe.Color)
+        </div>
+
+        <div class="col-md-12 form-group p_star">
+            <p>Sale</p>
+            @Html.EditorFor(model => model.newShoe.Sale, new { htmlAttributes = new { @class = "form-control", placeholder = "Sale" } })
+            @Html.ValidationMessageFor(model => model.newShoe.Sale)
+        </div>
+
+        <div class="col-md-12 form-group p_star">
+            <p>Image</p>
+            <input type="file" name="file" id="file">
+            @Html.ValidationMessageFor(model => model.newShoe.img)
+        </div>
+
+        <div class="col-md-12 form-group p_star">
+            <p>Catogory</p>
+            <select class="form-control" id="GroupID" name="GroupID">
+                @for (int i = 0; i < Model.Groups.Count; i++)
+                {
+                <option value="@Model.Groups[i].ID">@Model.Groups[i].Name</option>
+                }
+            </select>
+        </div>
+        
+        <div class="col-md-12 form-group p_star">
+            <p>Brand</p>
+            <select class="form-control" id="BrandID" name="BrandID">
+                @for (int i = 0; i < Model.Brands.Count; i++)
+                {
+                <option value="@Model.Brands[i].ID">@Model.Brands[i].Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-12 form-group">
+            <input type="submit" value="Create" class="primary-btn" style="width:100%" />
+        </div>
+    }
+
+</div>
