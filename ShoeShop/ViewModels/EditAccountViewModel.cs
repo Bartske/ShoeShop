@@ -10,5 +10,6 @@ namespace ShoeShop.ViewModels
     {
         public Account account { get; set; }
         public Login login { get; set; }
+        public bool EditButton { get; set; }
     }
 }

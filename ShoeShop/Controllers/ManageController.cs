@@ -104,7 +104,8 @@ namespace ShoeShop.Controllers
             return View(new EditAccountViewModel()
             {
                 account = accountLogic.GetAccountByID(id),
-                login = accountLogic.GetAccountByID(id).Login
+                login = accountLogic.GetAccountByID(id).Login,
+                EditButton=true
             });
         }
 

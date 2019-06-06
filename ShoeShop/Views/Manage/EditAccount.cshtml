@@ -68,14 +68,13 @@
                             @Html.EditorFor(model => model.account.ZIPcode, new { htmlAttributes = new { @class = "form-control", placeholder = "ZIP code" } })
                             @Html.ValidationMessageFor(model => model.account.ZIPcode)
                         </div>
-                        <div class="col-md-12 form-group p_star">
-                            @Html.EditorFor(model => model.login.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
-                            @Html.ValidationMessageFor(model => model.login.UserName)
-                        </div>
+                        @if (Model.EditButton)
+                        {
                         <div class="col-md-12 form-group">
                             <input type="button" value="Update" onclick="SubmitForm()" class="primary-btn" style="width:100%" />
                         </div>
-                    }
+                            }
+                        }
                 </div>
             </div>
         </div>

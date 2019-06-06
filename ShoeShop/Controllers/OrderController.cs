@@ -13,10 +13,12 @@ namespace ShoeShop.Controllers
     public class OrderController : Controller
     {
         ShopLogic shopLogic;
+        AccountLogic accountLogic;
 
         public OrderController()
         {
             shopLogic = new ShopLogic();
+            accountLogic = new AccountLogic();
         }
 
         public IActionResult ShoppingCart()
@@ -39,9 +41,21 @@ namespace ShoeShop.Controllers
             return View(model);
         }
 
-        public IActionResult Checkout()
+        public IActionResult Checkout(int accountID)
         {
-            return View();
+
+            CheckOutViewModel model = new CheckOutViewModel()
+            {
+                accountModel = new EditAccountViewModel()
+                {
+                    account = accountLogic.GetAccountByID(accountID),
+                    login = accountLogic.GetAccountByID(accountID).Login,
+                    EditButton = true
+                },
+                items = shopLogic.GetBagItems(accountID)
+            };
+
+            return View(model);
         }
 
         public IActionResult Confirmation()
