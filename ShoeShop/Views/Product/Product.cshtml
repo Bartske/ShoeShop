@@ -41,14 +41,14 @@
                     <h3>@Model.Shoe.Name</h3>
                     <h2>€@Model.Shoe.Price</h2>
                     <ul class="list">
-                        <li><a class="active" href="#"><span>Category</span> : @Model.Shoe.Group.Name</a></li>
+                        <li><a class="active" href=""><span>Category</span> : @Model.Shoe.Group.Name</a></li>
                         <li><a href="#"><span>Availibility</span> : In Stock</a></li>
                     </ul>
                     <p>
                         @Model.Shoe.Description
                     </p>
                     <div class="card_area d-flex align-items-center">
-                        <a class="primary-btn" href="#">Add to Cart</a>
+                        <a class="primary-btn" onclick="AddToBag(@Model.Shoe.ID)">Add to Cart</a>
                     </div>
                 </div>
             </div>

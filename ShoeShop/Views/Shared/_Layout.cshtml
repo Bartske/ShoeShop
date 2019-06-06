@@ -116,6 +116,29 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
     <script src="/js/gmaps.min.js"></script>
     <script src="/js/main.js"></script>
+
+    <script>
+        function AddToBag(ProductID) {
+            var AccountID = $('#AccountIDHolder').data('value');
+            if (AccountID == "" || AccountID == null) {
+                alert("You need to login first!!!");
+                window.location('/Account/Login');
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/Product/AddToBag?ProductID=" + ProductID + "&AccountID=" + AccountID,
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+                alert('The product is added to your shopping cart!')
+            }
+        }
+
+    </script>
 </body>
 
 </html>
