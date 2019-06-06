@@ -24,14 +24,15 @@ namespace ShoeShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromHours(5);//You can set Time
+                options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
             });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -54,8 +55,9 @@ namespace ShoeShop
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
             app.UseSession();
+
+            app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {

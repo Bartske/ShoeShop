@@ -12,10 +12,12 @@ namespace ShoeShop.Controllers
     public class ProductController : Controller
     {
         ShoeLogic shoeLogic;
+        ShopLogic shopLogic;
 
         public ProductController()
         {
             shoeLogic = new ShoeLogic();
+            shopLogic = new ShopLogic();
         }
 
         public IActionResult Index()
@@ -50,6 +52,11 @@ namespace ShoeShop.Controllers
                 shoes = shoeLogic.GetProductResults(brand, group, Color, sort, NumOfResults, Page)
             };
             return PartialView(model);
+        }
+
+        public void AddToBag(int ProductID, int AccountID)
+        {
+            shopLogic.AddToBag(ProductID, AccountID);
         }
     }
 }

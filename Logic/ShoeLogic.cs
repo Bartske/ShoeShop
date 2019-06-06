@@ -18,6 +18,40 @@ namespace Logic
 
         }
 
+        public List<Shoe> GetProductResults(string brand, string group, string Color, string sort, int NumOfResults, int Page)
+        {
+            List<Shoe> list = shoeContext.GetAll();
+
+            if (group != "")
+            {
+                list = list.Where(shoe => shoe.Group.Name == group).ToList();
+            }
+            if (brand != "")
+            {
+                list = list.Where(shoe => shoe.Brand.Name == brand).ToList();
+            }
+            if (Color != "")
+            {
+                list = list.Where(shoe => shoe.Color == Color).ToList();
+            }
+            switch (sort)
+            {
+                case "Alpabetical":
+                    list = list.OrderBy(Shoe => Shoe.Name).ToList();
+                    break;
+                case "Price":
+                    list = list.OrderBy(Shoe => Shoe.Price).ToList();
+                    break;
+                default:
+                    list = list.OrderBy(Shoe => Shoe.Name).ToList();
+                    break;
+            }
+            int start = (Page * NumOfResults) - NumOfResults;
+            int end = (Page * NumOfResults);
+
+            return list.Skip(start).Take(end).ToList();
+        }
+
         public List<Shoe> GetBestSellingShoes()
         {
             //Change later
@@ -69,39 +103,6 @@ namespace Logic
             shoeContext.DeleteShoe(id);
         }
 
-        public List<Shoe> GetProductResults(string brand, string group, string Color, string sort, int NumOfResults, int Page)
-        {
-            List<Shoe> list = shoeContext.GetAll();
-
-            if (group != "")
-            {
-                list = list.Where(shoe => shoe.Group.Name == group).ToList();
-            }
-            if (brand != "")
-            {
-                list = list.Where(shoe => shoe.Brand.Name == brand).ToList();
-            }
-            if (Color != "")
-            {
-                list = list.Where(shoe => shoe.Color == Color).ToList();
-            }
-            switch (sort)
-            {
-                case "Alpabetical":
-                    list = list.OrderBy(Shoe => Shoe.Name).ToList();
-                    break;
-                case "Price":
-                    list = list.OrderBy(Shoe => Shoe.Price).ToList();
-                    break;
-                default:
-                    list = list.OrderBy(Shoe => Shoe.Name).ToList();
-                    break;
-            }
-            int start = (Page * NumOfResults) - NumOfResults;
-            int end = (Page * NumOfResults);
-
-            return list.Skip(start).Take(end).ToList();
-        }
 
     }
 }

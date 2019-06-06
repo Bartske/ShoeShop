@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Logic;
 using Microsoft.AspNetCore.Mvc;
 using ShoeShop.ViewModels;
+using Microsoft.AspNetCore.Http;
+
 
 namespace ShoeShop.Controllers
 {

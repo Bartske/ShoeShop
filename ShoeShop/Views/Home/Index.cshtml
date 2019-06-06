@@ -21,7 +21,7 @@
                                         @Model.Banner[i].Description
                                     </p>
                                     <div class="add-bag d-flex align-items-center">
-                                        <a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
+                                        <a class="add-btn" onclick="AddToBag(@Model.Banner[i].ID)"><span class="lnr lnr-cross"></span></a>
                                         <span class="add-text text-uppercase">Add to Bag</span>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="prd-bottom">
 
-                                    <a href="" class="social-info">
+                                    <a onclick="AddToBag(@Model.Latest[i].ID)" class="social-info">
                                         <span class="ti-bag"></span>
                                         <p class="hover-text">add to bag</p>
                                     </a>
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="prd-bottom">
 
-                                    <a href="" class="social-info">
+                                    <a onclick="AddToBag(@Model.BestSelling[i].ID)" class="social-info">
                                         <span class="ti-bag"></span>
                                         <p class="hover-text">add to bag</p>
                                     </a>
@@ -175,3 +175,25 @@
     </div>
 </section>
 <!-- end product Area -->
+
+<script>
+    function AddToBag(ProductID) {
+        var AccountID = $('#AccountIDHolder').data('value');
+        if (AccountID == "" || AccountID == null) {
+            alert("You need to login first!!!");
+            window.location('/Account/Login');
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/Product/AddToBag?ProductID=" + ProductID + "&AccountID=" + AccountID,
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+            alert('The product is added to your shopping cart!')
+        }
+    }
+</script>
