@@ -58,8 +58,10 @@ namespace ShoeShop.Controllers
             return View(model);
         }
 
-        public IActionResult Confirmation()
+        public IActionResult Confirmation(int accountID)
         {
+            shopLogic.CreateOrder(accountID);
+            shopLogic.DeleteBag(accountID);
             return View();
         }
     }

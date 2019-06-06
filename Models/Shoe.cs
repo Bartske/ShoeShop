@@ -55,6 +55,5 @@ namespace Models
 
         public DateTime DateAdded { get; set; }
         
-        public List<ShoeSize> Sizes { get; set; }
     }
 }

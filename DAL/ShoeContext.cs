@@ -11,14 +11,12 @@ namespace DAL
         private IDataConnector dataConnector;
         private GroupContext groupContext;
         private BrandContext brandContext;
-        private ShoeSizeContext shoeSizeContext;
 
         public ShoeContext()
         {
             dataConnector = new SQLConnector();
             groupContext = new GroupContext(dataConnector);
             brandContext = new BrandContext(dataConnector);
-            shoeSizeContext = new ShoeSizeContext(dataConnector);
         }
 
         public ShoeContext(IDataConnector dataConnector)
@@ -26,7 +24,6 @@ namespace DAL
             dataConnector = this.dataConnector;
             groupContext = new GroupContext(this.dataConnector);
             brandContext = new BrandContext(this.dataConnector);
-            shoeSizeContext = new ShoeSizeContext(this.dataConnector);
         }
 
         //Create
@@ -61,8 +58,7 @@ namespace DAL
                 Color = dataConnector.Select("SELECT `Color` FROM `shoe` WHERE `ID` = '" + ID + "'")[0],
                 Sale = Convert.ToBoolean(dataConnector.Select("SELECT `Sale` FROM `shoe` WHERE `ID` = '" + ID + "'")[0]),
                 Description = dataConnector.Select("SELECT `Description` FROM `shoe` WHERE `ID` = '" + ID + "'")[0],
-                DateAdded = Convert.ToDateTime(dataConnector.Select("SELECT `DateAdded` FROM `shoe` WHERE `ID` = '" + ID + "'")[0]),
-                Sizes = shoeSizeContext.GetShoeSizes(ID)
+                DateAdded = Convert.ToDateTime(dataConnector.Select("SELECT `DateAdded` FROM `shoe` WHERE `ID` = '" + ID + "'")[0])
             };
         }
 

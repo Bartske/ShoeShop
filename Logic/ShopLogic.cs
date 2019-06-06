@@ -32,5 +32,10 @@ namespace Logic
         {
             return bagItemContext.GetItemsFromUser(AccountID);
         }
+
+        public void CreateOrder(int accountID)
+        {
+
+        }
     }
 }
