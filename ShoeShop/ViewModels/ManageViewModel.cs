@@ -12,5 +12,6 @@ namespace ShoeShop.ViewModels
         public ShoeListViewModel shoeListViewModel { get; set; }
         public RegisterViewModel registerViewModel { get; set; }
         public AccountListViewModel accountListViewModel { get; set; }
+        public orderListViewModel orderListViewModel { get; set; }
     }
 }

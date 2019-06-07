@@ -1,0 +1,128 @@
+﻿@model ShoeShop.ViewModels.orderListViewModel
+    <br />
+
+    <div class="inputBox headTekst col-12" style="padding: 0;">
+        <input type="text" id="SearchInputOrders" onkeyup="SearchordersTable()" placeholder="Search for a order" style="width: 100%; padding: 0;" class="form-control"/>
+    </div>
+    <table class="table" id="ordersTable">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Costumer</th>
+                <th scope="col">Number of products</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.orders.Count; i++)
+            {
+                <tr data-toggle="collapse" data-target="#demo-@Model.orders[i].ID" class="accordion-toggle">
+                    <td>@Model.orders[i].ID</td>
+                    <td>@Model.orders[i].Account.LastName, @Model.orders[i].Account.FirstName @Model.orders[i].Account.MiddleName</td>
+                    <td>@Model.orders[i].items.Count</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="hiddenRow">
+                        <div id="demo-@Model.orders[i].ID" class="accordian-body collapse">
+                            <div class="row">
+                                <div class="col-10">
+                                    <b>PhoneNumber : </b> @Model.orders[i].Account.PhoneNumber <br />
+                                    <b>Country : </b> @Model.orders[i].Account.Country <br />
+                                    <b>Address : </b> @Model.orders[i].Account.Address <br />
+                                    <b>City : </b> @Model.orders[i].Account.City <br />
+                                    <b>Zip Code : </b> @Model.orders[i].Account.ZIPcode <br />
+                                    <b>Login Name : </b> @Model.orders[i].Account.Login.UserName<br />
+                                </div>
+                                <div class="col-2">
+                                    <input type="button" class="btn btn-primary" value="Edit" onclick="EditOrder(@Model.orders[i].ID)" />
+                                </div>
+                                <div class="col-12">
+                                    <table class="table" style="width: 100%">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" colspan="3">Product</th>
+                                                <th scope="col">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int j = 0; j < Model.orders[i].items.Count; j++)
+                                            {
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="media">
+                                                            <div class="d-flex">
+                                                                <img src="~/img/product/@Model.orders[i].items[j].shoe.img" alt="" style="height: 100px; width: auto;">
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <div class="media-body">
+                                                            <p>@Model.orders[i].items[j].shoe.Name</p>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h5>€@Model.orders[i].items[j].shoe.Price</h5>
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <script>
+        function EditOrder(id) {
+            window.location.href = '/Manage/EditShoe/' + id;
+        }
+
+        function SearchordersTable() {
+            // Variabelen aanmaken
+            var input, filter, table, tr, td, i, contains;
+            input = document.getElementById("SearchInputOrders");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("ordersTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Door alllen tabel rijen lopen en verglijken of een waarden aan de zoekdracht voldoet
+            for (i = 0; i < tr.length; i++) {
+                if (!tr[i].classList.contains("Header")) {
+
+                    contains = false;
+                    tdID = tr[i].getElementsByTagName("td")[0];
+                    tdName = tr[i].getElementsByTagName("td")[1];
+                    tdNumOfItems = tr[i].getElementsByTagName("td")[2];
+
+                    if (tdID) {
+                        if (tdID.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            contains = true;
+                        }
+                    }
+                    if (tdName) {
+                        if (tdName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            contains = true;
+                        }
+                    }
+                    if (tdNumOfItems) {
+                        if (tdNumOfItems.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            contains = true;
+                        }
+                    }
+                    if (contains) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+    </script>

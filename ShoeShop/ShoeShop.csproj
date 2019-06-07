@@ -31,6 +31,9 @@
     <Content Update="Views\Manage\PartialViews\_CreateNewAccount.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Manage\PartialViews\_OrderList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Product\ProductOverView.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

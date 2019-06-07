@@ -14,22 +14,25 @@ namespace ShoeShop.Controllers
     public class ManageController : Controller
     {
         ShoeLogic shoeLogic;
+        ShopLogic shopLogic;
         AccountLogic accountLogic;
 
         public ManageController()
         {
             shoeLogic = new ShoeLogic();
             accountLogic = new AccountLogic();
+            shopLogic = new ShopLogic();
         }
 
 
         public IActionResult Index()
         {
             return View(new ManageViewModel() {
-                newShoeViewModel = new NewShoeViewModel() { Brands = shoeLogic.GetBrands(), Groups = shoeLogic.GetGroups()},
-                shoeListViewModel = new ShoeListViewModel() { Shoes = shoeLogic.GetShoes()},
-                accountListViewModel = new AccountListViewModel() { Accounts = accountLogic.GetAllAccounts()},
-                registerViewModel = new RegisterViewModel() { account = new Account(), login = new Login()}
+                newShoeViewModel = new NewShoeViewModel() { Brands = shoeLogic.GetBrands(), Groups = shoeLogic.GetGroups() },
+                shoeListViewModel = new ShoeListViewModel() { Shoes = shoeLogic.GetShoes() },
+                accountListViewModel = new AccountListViewModel() { Accounts = accountLogic.GetAllAccounts() },
+                registerViewModel = new RegisterViewModel() { account = new Account(), login = new Login() },
+                orderListViewModel = new orderListViewModel() { orders = shopLogic.GetAllOrder() }
             });
         }
 

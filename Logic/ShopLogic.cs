@@ -60,6 +60,11 @@ namespace Logic
 
         }
 
+        public List<Order> GetAllOrder()
+        {
+            return orderContext.GetAll();
+        }
+
         public void DeleteBag(int accountID)
         {
             bagItemContext.DeleteBagItems(bagItemContext.GetItemsFromUser(accountID));
