@@ -1,27 +1,45 @@
 ﻿@model ShoeShop.ViewModels.ProductOverViewViewModel
+    @for (int i = 0; i < Model.shoes.Count; i++)
+    {
+        <!-- single product -->
+        <div class="col-lg-4 col-md-6">
+            <div class="single-product">
+                <a href="Product/Product/@Model.shoes[i].ID"><img class="img-fluid" src="~/img/product/@Model.shoes[i].img" alt=""></a>
+                <div class="product-details">
+                    <h6>
+                        @Model.shoes[i].Name
+                    </h6>
+                    <div class="price">
+                        <h6>€@Model.shoes[i].Price</h6>
+                        <h6 class="l-through">€@Model.shoes[i].OldPrice</h6>
+                    </div>
+                    <div class="prd-bottom">
 
-@for (int i = 0; i < Model.shoes.Count; i++)
-{
-    <!-- single product -->
-    <div class="col-lg-4 col-md-6">
-        <div class="single-product">
-            <a href="Product/Product/@Model.shoes[i].ID"><img class="img-fluid" src="~/img/product/@Model.shoes[i].img" alt=""></a>
-            <div class="product-details">
-                <h6>
-                    @Model.shoes[i].Name
-                </h6>
-                <div class="price">
-                    <h6>€@Model.shoes[i].Price</h6>
-                    <h6 class="l-through">€@Model.shoes[i].OldPrice</h6>
-                </div>
-                <div class="prd-bottom">
-
-                    <a onclick="AddToBag(@Model.shoes[i].ID)" class="social-info">
-                        <span class="ti-bag"></span>
-                        <p class="hover-text">add to bag</p>
-                    </a>
+                        <a onclick="AddToBag(@Model.shoes[i].ID)" class="social-info">
+                            <span class="ti-bag"></span>
+                            <p class="hover-text">add to bag</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+    }
+
+    <div class="filter-bar d-flex flex-wrap align-items-center" style="width: 100%;">
+        <div class="sorting mr-auto">
+        </div>
+        <div class="pagination">
+            @if (Model.Page != 1)
+            {
+                <a onclick="ChangePage(@(Model.Page - 1))" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+                <a onclick="ChangePage(@(Model.Page - 1))">@(Model.Page - 1)</a>
+            }
+                <a >@(Model.Page)</a>
+            @if (Model.Page != Model.NumberOfPages)
+            {
+                <a onclick="ChangePage(@(Model.Page + 1))">@(Model.Page + 1)</a>
+                <a onclick="ChangePage(@(Model.Page + 1))" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            }
+
+        </div>
     </div>
-}

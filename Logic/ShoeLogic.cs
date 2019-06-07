@@ -20,6 +20,16 @@ namespace Logic
 
         public List<Shoe> GetProductResults(string brand, string group, string Color, string sort, int NumOfResults, int Page)
         {
+            List<Shoe> list = GetProductFromFilter(brand, group, Color, sort);
+
+            int start = (Page * NumOfResults) - NumOfResults;
+            int end = (Page * NumOfResults);
+
+            return list.Skip(start).Take(end).ToList();
+        }
+
+        public List<Shoe> GetProductFromFilter(string brand, string group, string Color, string sort)
+        {
             List<Shoe> list = shoeContext.GetAll();
 
             if (group != "")
@@ -46,10 +56,8 @@ namespace Logic
                     list = list.OrderBy(Shoe => Shoe.Name).ToList();
                     break;
             }
-            int start = (Page * NumOfResults) - NumOfResults;
-            int end = (Page * NumOfResults);
 
-            return list.Skip(start).Take(end).ToList();
+            return list.ToList();
         }
 
         public List<Shoe> GetBestSellingShoes()
