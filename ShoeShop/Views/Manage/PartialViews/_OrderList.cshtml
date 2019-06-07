@@ -33,7 +33,7 @@
                                     <b>Login Name : </b> @Model.orders[i].Account.Login.UserName<br />
                                 </div>
                                 <div class="col-2">
-                                    <input type="button" class="btn btn-primary" value="Edit" onclick="EditOrder(@Model.orders[i].ID)" />
+                                    <input type="button" class="btn btn-primary" value="Complete Order" onclick="CompleteOrder(@Model.orders[i].ID)" />
                                 </div>
                                 <div class="col-12">
                                     <table class="table" style="width: 100%">
@@ -80,8 +80,13 @@
     </table>
 
     <script>
-        function EditOrder(id) {
-            window.location.href = '/Manage/EditShoe/' + id;
+        function CompleteOrder(id) {
+            $.ajax({
+                url: '/Manage/CompleteOrder/' + id,
+                success: function (result) {
+                    location.reload();
+                }
+            });
         }
 
         function SearchordersTable() {

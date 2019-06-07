@@ -50,19 +50,34 @@
 
     <script>
         function EditAccount(id) {
-            window.location.href = '/Manage/EditAccount/' + id;
+            $.ajax({
+                url: '/Manage/EditAccount/' + id,
+                success: function (result) {
+                    location.reload();
+                }
+            });
         }
         function DeleteAccount(id) {
             var r = confirm("Are you sure you want to delete this Account?");
             if (r == true) {
-                window.open('/Manage/DeleteAccount/' + id, '_blank');
+                $.ajax({
+                    url: '/Manage/DeleteAccount/' + id,
+                    success: function (result) {
+                        location.reload();
+                    }
+                });
             } else {
             }
         }
         function ResetPassword(id) {
             var r = confirm("Are you sure you want to reset the password of this Account?");
             if (r == true) {
-                window.open('/Account/ResetPassword/' + id, '_blank');
+                $.ajax({
+                    url: '/Account/ResetPassword/' + id,
+                    success: function (result) {
+                        location.reload();
+                    }
+                });
             } else {
             }
         }

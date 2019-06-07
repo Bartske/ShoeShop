@@ -123,5 +123,10 @@ namespace ShoeShop.Controllers
         {
             accountLogic.DeleteAccount(id);
         }
+
+        public void CompleteOrder(int id)
+        {
+            shopLogic.CompleteOrder(id);
+        }
     }
 }

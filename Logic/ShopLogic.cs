@@ -69,5 +69,10 @@ namespace Logic
         {
             bagItemContext.DeleteBagItems(bagItemContext.GetItemsFromUser(accountID));
         }
+
+        public void CompleteOrder(int OrderID)
+        {
+            orderContext.DeleteOrder(OrderID);
+        }
     }
 }
