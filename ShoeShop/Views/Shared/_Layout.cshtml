@@ -62,7 +62,7 @@
                             }
                             else
                             {
-                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Account", "Account")">@Context.Session.GetString("FullName")</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Account/Account?AccountID=@Context.Session.GetString("AccountID")">@Context.Session.GetString("FullName")</a></li>
                             }
                         </ul>
                         <ul class="nav navbar-nav navbar-right">

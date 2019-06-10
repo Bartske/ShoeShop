@@ -1,0 +1,43 @@
+﻿@model ShoeShop.ViewModels.AccountViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Manage</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="@Url.Action("Index", "Home")">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Account</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<section class="">
+    <div class="container" style="background-color: white; background-image: none;">
+        <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-Account-tab" data-toggle="pill" href="#pills-Account" role="tab" aria-controls="pills-Account" aria-selected="true">Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-order-tab" data-toggle="pill" href="#pills-order" role="tab" aria-controls="pills-order" aria-selected="false">Orders</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="pills-Account" role="tabpanel" aria-labelledby="pills-Account-tab">
+                @Html.Partial("PartialViews/_EditAccount", Model.editAccountViewModel)
+            </div>
+
+
+            <div class="tab-pane fade" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab">
+                @Html.Partial("../Manage/PartialViews/_OrderList", Model.orderListViewModel)
+            </div>
+        </div>
+    </div>
+</section>

@@ -25,6 +25,15 @@
         </div>
     }
 
+@if (Model.shoes.Count == 0)
+{
+        <div class="col-12" style="height: 200px; ">
+            <h6 style="font-size: 46px;">
+                No products mach the filters!!!
+            </h6>
+        </div>
+}
+
     <div class="filter-bar d-flex flex-wrap align-items-center" style="width: 100%;">
         <div class="sorting mr-auto">
         </div>

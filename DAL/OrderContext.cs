@@ -63,6 +63,16 @@ namespace DAL
             return Order;
         }
 
+        public List<Order> GetOrderFromUser(int AccountID)
+        {
+            List<Order> list = new List<Order>();
+            foreach (string ID in dataConnector.Select("SELECT `ID` FROM `order` WHERE `AccountID` = '"+AccountID.ToString()+"'"))
+            {
+                list.Add(GetOrder(Convert.ToInt32(ID)));
+            }
+            return list;
+        }
+
         public List<Order> GetAll()
         {
             List<Order> list = new List<Order>();

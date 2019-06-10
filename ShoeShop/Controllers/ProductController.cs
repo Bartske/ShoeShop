@@ -71,6 +71,11 @@ namespace ShoeShop.Controllers
 
         private int CalculateNumberOfPages(int NumberOfProducts, int NumberOrResults)
         {
+            if (NumberOfProducts == 0)
+            {
+                return 1;
+            }
+
             int Pages = NumberOfProducts / NumberOfProducts;
             if (NumberOrResults * Pages <  NumberOfProducts)
             {

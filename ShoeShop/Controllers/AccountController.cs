@@ -14,6 +14,7 @@ namespace ShoeShop.Controllers
     public class AccountController : Controller
     {
         AccountLogic AccountLogic = new AccountLogic();
+        ShopLogic shopLogic = new ShopLogic();
 
         public IActionResult Login()
         {
@@ -50,6 +51,24 @@ namespace ShoeShop.Controllers
         public IActionResult Register()
         {
             return View(new RegisterViewModel());
+        }
+
+        public IActionResult Account(int AccountID)
+        {
+            AccountViewModel model = new AccountViewModel()
+            {
+                editAccountViewModel = new EditAccountViewModel()
+                {
+                    account = AccountLogic.GetAccountByID(AccountID),
+                    login = AccountLogic.GetAccountByID(AccountID).Login,
+                    EditButton = true
+                },
+                orderListViewModel = new orderListViewModel()
+                {
+                    orders = shopLogic.GetOrderFromUser(AccountID)
+                }
+            };
+            return View(model);
         }
 
         [HttpPost]
