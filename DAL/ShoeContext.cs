@@ -31,7 +31,7 @@ namespace DAL
         {
             string sale = (Shoe.Sale) ? "0" : "1";
             string date = DateTime.Now.ToString();
-            dataConnector.Insert("INSERT INTO `shoe`(`ID`, `img`, `Name`, `Price`, `OldPrice`, `GroupID`, `BrandID`, `Color`, `Sale`,`DateAdded`, `Description`) VALUES (NULL,'"+Shoe.img+ "','" + Shoe.Name + "','" + Shoe.Price + "','" + Shoe.OldPrice + "','" + Shoe.Group.ID + "','" + Shoe.Brand.ID + "','" + Shoe.Color + "','" + sale + "','" + date + "','" + Shoe.Description + "')");
+            dataConnector.Insert("INSERT INTO `shoe`(`ID`, `img`, `Name`, `Price`, `OldPrice`, `GroupID`, `BrandID`, `Color`, `Sale`,`DateAdded`, `Description`, `Stock`) VALUES (NULL,'"+Shoe.img+ "','" + Shoe.Name + "','" + Shoe.Price + "','" + Shoe.OldPrice + "','" + Shoe.Group.ID + "','" + Shoe.Brand.ID + "','" + Shoe.Color + "','" + sale + "','" + date + "','" + Shoe.Description + "', '50')");
             return GetShoe(Shoe);
         }
 
@@ -58,7 +58,8 @@ namespace DAL
                 Color = dataConnector.Select("SELECT `Color` FROM `shoe` WHERE `ID` = '" + ID + "'")[0],
                 Sale = Convert.ToBoolean(dataConnector.Select("SELECT `Sale` FROM `shoe` WHERE `ID` = '" + ID + "'")[0]),
                 Description = dataConnector.Select("SELECT `Description` FROM `shoe` WHERE `ID` = '" + ID + "'")[0],
-                DateAdded = Convert.ToDateTime(dataConnector.Select("SELECT `DateAdded` FROM `shoe` WHERE `ID` = '" + ID + "'")[0])
+                DateAdded = Convert.ToDateTime(dataConnector.Select("SELECT `DateAdded` FROM `shoe` WHERE `ID` = '" + ID + "'")[0]),
+                Stock = Convert.ToInt32(dataConnector.Select("SELECT `Stock` FROM `shoe` WHERE `ID` = '" + ID + "'")[0]),
             };
         }
 
@@ -98,7 +99,7 @@ namespace DAL
         public void UpdateShoe(Shoe Shoe)
         {
             string sale = (Shoe.Sale) ? "0" : "1";
-            dataConnector.Update("UPDATE `shoe` SET `img`='" + Shoe.img + "',`Name`='" + Shoe.Name + "',`Price`='" + Shoe.Price + "',`OldPrice`='" + Shoe.OldPrice + "',`GroupID`='" + Shoe.Group.ID + "',`BrandID`='" + Shoe.Brand.ID + "',`Color`='" + Shoe.Color + "',`Sale`='" + sale + "',`Description`='" + Shoe.Description + "' WHERE `ID` = '"+Shoe.ID+"'");
+            dataConnector.Update("UPDATE `shoe` SET `img`='" + Shoe.img + "',`Name`='" + Shoe.Name + "',`Price`='" + Shoe.Price + "',`OldPrice`='" + Shoe.OldPrice + "',`GroupID`='" + Shoe.Group.ID + "',`BrandID`='" + Shoe.Brand.ID + "',`Color`='" + Shoe.Color + "',`Sale`='" + sale + "',`Description`='" + Shoe.Description + "', `Stock`='"+Shoe.Stock.ToString()+"' WHERE `ID` = '"+Shoe.ID+"'");
         }
 
         public void UpdateShoes(List<Shoe> Shoes)

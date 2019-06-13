@@ -51,9 +51,14 @@ namespace Models
         [DisplayName("Sale")]
         [Range(typeof(bool), "true", "true", ErrorMessage = "The field Is Active must be checked.")]
         public bool Sale { get; set; }
-        
+
+        [DisplayName("Price")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "You can only use numbers")]
+        public int Stock { get; set; }
+
+
 
         public DateTime DateAdded { get; set; }
-        
+
     }
 }
