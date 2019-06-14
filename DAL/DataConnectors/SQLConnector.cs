@@ -15,7 +15,7 @@ namespace DAL.DataConnectors
         private string password;
         private bool error = false;
         private string sErrorData = "";
-        private string dbName = "shoeshop";
+        private string dbName = "dbi382099";
 
         public SQLConnector()
         {
@@ -44,10 +44,10 @@ namespace DAL.DataConnectors
         //Initialize values
         public void Initialize()
         {
-            server = "127.0.0.1";
+            server = "studmysql01.fhict.local";
             database = dbName;
-            uid = "root";
-            password = "";
+            uid = "dbi382099";
+            password = "890e329bbf";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "UID=" + uid + ";" + "DATABASE=" +
             database + ";" + "PASSWORD=" + password + ";";
